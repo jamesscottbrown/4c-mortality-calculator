@@ -93,6 +93,7 @@ const Explanation = ({ short_names }) => (
                   <th
                     style={{
                       "border-bottom": "1px solid black",
+                      "max-width": "180px",
                     }}
                   >
                     {details.name}
