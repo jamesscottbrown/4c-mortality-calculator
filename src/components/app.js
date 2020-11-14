@@ -2,7 +2,7 @@ import { Component } from "preact";
 import { useState } from "preact/hooks";
 import CombinedRiskPlot from "./CombinedRiskPlot";
 
-import { score_table, scoreColors } from "./data";
+import { mortality, score_table, scoreColors } from "./data";
 
 const Results = ({ score }) => {
   return score !== null ? (
@@ -52,11 +52,103 @@ const Intro = () => (
       score.
     </p>
     <p>
-      This is an infographic that visualises risk, based on observed mortality
-      among hospitalised adult COVID19 patients recruited into the ISARIC 4C
-      study in the UK.
+      This page is an infographic that visualises risk, based on observed
+      mortality among hospitalised adult COVID19 patients recruited into the
+      ISARIC 4C study in the UK.{" "}
+      <b>It is not a clinical decision support system</b>.
     </p>
   </>
+);
+
+const round = (num) => Math.round((num + Number.EPSILON) * 10) / 10;
+const Explanation = ({ short_names }) => (
+  <details style={{ border: "1px solid lightgrey", "border-radius": "5px" }}>
+    <summary>How this calculation is done</summary>
+    <p>
+      The calculation is simple, and can be done without even requiring a
+      calculator.
+    </p>
+    <p>
+      The ISARIC4C score is obtained by adding the scores for each individual
+      variable (see Table 2 of{" "}
+      <a href="https://doi.org/10.1136/bmj.m3339"> the paper</a>). The
+      contributions to the total score are:
+    </p>
+
+    <div style={{ width: "max-content", margin: "auto" }}>
+      {short_names.map((n) => {
+        const details = score_table[n];
+        return (
+          <>
+            <table
+              style={{
+                "padding-bottom": "10px",
+                "margin-left": "auto",
+                "margin-right": "0",
+                "text-align": "right",
+              }}
+            >
+              <thead>
+                <tr>
+                  <th
+                    style={{
+                      "border-bottom": "1px solid black",
+                    }}
+                  >
+                    {details.name}
+                  </th>
+                  <th style={{ "border-bottom": "1px solid black" }}>Score</th>
+                </tr>
+              </thead>
+              {Object.keys(details.scores).map((value, i) => (
+                <tr
+                  style={{
+                    background: i % 2 == 0 ? "white" : "#ebebeb",
+                  }}
+                >
+                  <td>{value}</td>
+                  <td>+{details.scores[value]}</td>
+                </tr>
+              ))}
+            </table>
+          </>
+        );
+      })}
+    </div>
+    <p>
+      The observed in-hospital mortality for patients with this score in the
+      validation cohort is then given by a lookup table (see Figure 2 of{" "}
+      <a href="https://doi.org/10.1136/bmj.m3339"> the paper</a>):
+    </p>
+
+    <table
+      style={{
+        "padding-bottom": "10px",
+        margin: "auto",
+        "text-align": "right",
+      }}
+    >
+      <thead>
+        <tr>
+          <th
+            style={{
+              "border-bottom": "1px solid black",
+            }}
+          >
+            4C Mortality Score
+          </th>
+          <th style={{ "border-bottom": "1px solid black" }}>Mortality/%</th>
+        </tr>
+      </thead>
+
+      {mortality.slice(1).map((val, i) => (
+        <tr style={{ background: i % 2 == 0 ? "white" : "#ebebeb" }}>
+          <td>{i + 1}</td>
+          <td>{round(val)}</td>
+        </tr>
+      ))}
+    </table>
+  </details>
 );
 
 const WhatYouShouldDo = () => (
@@ -178,6 +270,8 @@ export default class App extends Component {
         <h1>4C Mortality Score</h1>
 
         <Intro />
+
+        <Explanation short_names={short_names} />
 
         <div
           style={{
