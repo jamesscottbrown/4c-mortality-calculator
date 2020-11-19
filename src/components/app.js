@@ -55,7 +55,6 @@ const Intro = () => (
       This page is an infographic that visualises risk, based on observed
       mortality among hospitalised adult COVID19 patients recruited into the
       ISARIC 4C study in the UK.{" "}
-      <b>It is not a clinical decision support system</b>.
     </p>
   </>
 );
