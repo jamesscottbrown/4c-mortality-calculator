@@ -237,6 +237,8 @@ const Measurement = ({ short_name, f, selection, handleSelection }) => {
             onclick={() => handleSelection(value, scores[value])}
           >
             {value}
+            <br />
+            (+{scores[value]})
           </button>
         ))}
       </div>
