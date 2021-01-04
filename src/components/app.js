@@ -36,13 +36,13 @@ const Intro = () => (
       in-hospital mortality for hospitalised COVID-19 patients, produced by the{" "}
       <a href="https://isaric4c.net/">ISARIC 4C consortium</a>.
     </p>
-
     <p>
-      The Score is intended to be considered by clinicians alongside their own
-      clinical judgement. In compliance with Medical Devices Regulations 2002
-      the raw data generating the score and look up table to estimate mortality
-      are provided for the clinician to review and as such this webpage is not
-      considered to be a medical device.
+      The Score is intended to be considered only by clinicians to aid their
+      clinical decision-making, however clinicians should ultimately rely on
+      their own clinical judgement in treatment decisions. In compliance with
+      the Medical Devices Regulations 2002, the raw data generating the Score
+      and look up table to estimate mortality are provided for the clinician to
+      review and as such this webpage is not considered to be a medical device.
     </p>
     <p>
       It is designed to be easy-to-use, and require only parameters that are
