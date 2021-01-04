@@ -34,8 +34,15 @@ const Intro = () => (
     <p>
       The 4C Mortality Score is a risk stratification score that predicts
       in-hospital mortality for hospitalised COVID-19 patients, produced by the{" "}
-      <a href="https://isaric4c.net/">ISARIC 4C consortium</a>.{" "}
-      <b>It is intended for use by clinicians.</b>
+      <a href="https://isaric4c.net/">ISARIC 4C consortium</a>.
+    </p>
+
+    <p>
+      The Score is intended to be considered by clinicians alongside their own
+      clinical judgement. In compliance with Medical Devices Regulations 2002
+      the raw data generating the score and look up table to estimate mortality
+      are provided for the clinician to review and as such this webpage is not
+      considered to be a medical device.
     </p>
     <p>
       It is designed to be easy-to-use, and require only parameters that are
@@ -71,50 +78,10 @@ const Explanation = ({ short_names }) => (
       The ISARIC4C score is obtained by adding the scores for each individual
       variable (see Table 2 of{" "}
       <a href="https://doi.org/10.1136/bmj.m3339"> the paper</a>). The
-      contributions to the total score are:
+      contributions to the total score are listed on each button in the form
+      below.
     </p>
 
-    <div style={{ width: "max-content", margin: "auto" }}>
-      {short_names.map((n) => {
-        const details = score_table[n];
-        return (
-          <>
-            <table
-              style={{
-                "padding-bottom": "10px",
-                "margin-left": "auto",
-                "margin-right": "0",
-                "text-align": "right",
-              }}
-            >
-              <thead>
-                <tr>
-                  <th
-                    style={{
-                      "border-bottom": "1px solid black",
-                      "max-width": "180px",
-                    }}
-                  >
-                    {details.name}
-                  </th>
-                  <th style={{ "border-bottom": "1px solid black" }}>Score</th>
-                </tr>
-              </thead>
-              {Object.keys(details.scores).map((value, i) => (
-                <tr
-                  style={{
-                    background: i % 2 == 0 ? "white" : "#ebebeb",
-                  }}
-                >
-                  <td>{value}</td>
-                  <td>+{details.scores[value]}</td>
-                </tr>
-              ))}
-            </table>
-          </>
-        );
-      })}
-    </div>
     <p>
       The observed in-hospital mortality for patients with this score in the
       validation cohort is then given by a lookup table (see Figure 2 of{" "}
