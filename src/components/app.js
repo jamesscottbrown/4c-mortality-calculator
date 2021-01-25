@@ -176,7 +176,7 @@ const Measurement = ({ short_name, f, selection, handleSelection }) => {
         onClick={() => setUsingAltUnits(!usingAltUnits)}
         class="units-button"
       >
-        Use {usingAltUnits ? f.name : f.altName}
+        Switch to using {usingAltUnits ? f.name : f.altName}
       </button>
     );
   };
