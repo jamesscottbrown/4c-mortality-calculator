@@ -1,5 +1,8 @@
 # prognostic-calculator
 
+To deploy this, I previously ran `npm run deploy` from my desktop (which ued the [`gh-pages`](https://www.npmjs.com/package/gh-pages) npm package); there is now [a GitHub Action](.github/workflows/deploy.yml) that deploys from a push to master
+
+
 ## CLI Commands
 
 ``` bash
