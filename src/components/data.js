@@ -61,7 +61,7 @@ const score_table = {
     },
     name: "Urea (mmol/L)",
     altScores: {
-      "⩽19.6": 0,
+      "<19.6": 0,
       "19.6-39.2": 1,
       ">39.2": 3,
     },
